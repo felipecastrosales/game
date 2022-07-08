@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 
 import 'components/category_tile.dart';
+import 'components/game_tile.dart';
 import 'components/headers.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +18,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Home Page',
+          'Game App',
           style: AppTextStyles.appBar,
         ),
       ),
@@ -49,6 +51,27 @@ class HomePage extends StatelessWidget {
           const Headers(
             title: 'Jogos',
             icon: Icons.videogame_asset,
+          ),
+          Flexible(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: GridView.builder(
+                itemCount: 20,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 4 / 5,
+                ),
+                itemBuilder: (context, index) {
+                  return GameTile(
+                    image: '$index',
+                    text: 'Game $index',
+                    onTap: () {},
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
