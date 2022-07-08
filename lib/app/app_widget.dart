@@ -14,7 +14,6 @@ class AppWidget extends StatelessWidget {
       theme: AppThemes.light,
       initialRoute: Pages.home,
       routes: Routes.getRoutes(),
-      home: Container(),
     );
   }
 }
