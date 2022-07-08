@@ -33,4 +33,10 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.text,
   );
+
+  static final gameDetails = GoogleFonts.nunito(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.text,
+  );
 }

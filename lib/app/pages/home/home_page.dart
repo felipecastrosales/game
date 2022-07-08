@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
 import 'package:game/app/widgets/custom_divider.dart';
@@ -67,7 +68,9 @@ class HomePage extends StatelessWidget {
                   return GameTile(
                     image: '$index',
                     text: 'Game $index',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Pages.details);
+                    },
                   );
                 },
               ),
