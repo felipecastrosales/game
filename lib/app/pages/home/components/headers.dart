@@ -32,7 +32,7 @@ class Headers extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(4),
             alignment: Alignment.center,
             decoration: const BoxDecoration(
               color: AppColors.backgroundDark,

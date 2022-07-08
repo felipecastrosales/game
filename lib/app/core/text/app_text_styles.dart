@@ -15,4 +15,16 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.text,
   );
+
+  static final categorySelected = GoogleFonts.nunito(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.text,
+  );
+
+  static final categoryUnselected = GoogleFonts.nunito(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.text,
+  );
 }
