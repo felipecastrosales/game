@@ -1,19 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game/data/services/games/games_list_service.dart';
+import 'package:game/data/services/games/games_list_service_impl.dart';
+import 'package:provider/provider.dart';
+
+import 'package:game/data/repositories/games_list_repository.dart';
+import 'package:game/data/repositories/games_list_repository_impl.dart';
+import 'package:game/data/services/dio/dio_service.dart';
+import 'package:game/data/services/dio/dio_service_impl.dart';
 
 import 'config/pages/pages.dart';
 import 'config/routes/routes.dart';
 import 'core/theme/app_themes.dart';
+import 'pages/home/bloc/home_page_bloc.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Game App',
-      theme: AppThemes.light,
-      initialRoute: Pages.home,
-      routes: Routes.getRoutes(),
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (_) {},
+        ),
+        Provider(
+          create: (context) => DioServiceImpl(),
+        ),
+        Provider<GamesListRepository>(
+          create: (context) => GamesListRepositoryImpl(
+            dioService: context.read<DioService>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => HomePageBloc(
+            gamesRepository: context.read<GamesListRepository>(),
+          ),
+        ),
+        Provider<GamesListService>(
+          create: (context) => GamesListServiceImpl(
+            gamesRepository: context.read<GamesListRepository>(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Game App',
+        theme: AppThemes.light,
+        initialRoute: Pages.home,
+        routes: Routes.getRoutes(),
+      ),
     );
   }
 }

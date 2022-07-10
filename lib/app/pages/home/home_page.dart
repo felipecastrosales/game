@@ -1,16 +1,46 @@
+// import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 
 import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
 import 'package:game/app/widgets/custom_divider.dart';
+import 'package:game/data/models/game/game_model.dart';
+import 'package:game/data/repositories/games_list_repository_impl.dart';
+import 'package:game/data/services/dio/dio_service_impl.dart';
 
 import 'components/category_tile.dart';
 import 'components/game_tile.dart';
 import 'components/headers.dart';
+import 'home_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // ignore: unused_field
+  final _games = <GameModel>[];
+
+  final _controller = HomeController(
+    GamesListRepositoryImpl(
+      dioService: DioServiceImpl(),
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // ignore: unused_local_variable
+      var controller = _controller.fetch();
+      // developer.log(controller.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +83,24 @@ class HomePage extends StatelessWidget {
             title: 'Jogos',
             icon: Icons.videogame_asset,
           ),
+          // Expanded(
+          //   child: ValueListenableBuilder<List<GameModel?>>(
+          //     valueListenable: _controller.games,
+          //     builder: (_, games, __) {
+          //       return ListView.separated(
+          //         physics: const NeverScrollableScrollPhysics(),
+          //         shrinkWrap: true,
+          //         itemCount: _games.length,
+          //         separatorBuilder: (_, __) => const Divider(),
+          //         itemBuilder: (_, index) {
+          //           return CustomListCardWidget(
+          //             game: _games[index],
+          //           );
+          //         },
+          //       );
+          //     },
+          //   ),
+          // ),
           Flexible(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
