@@ -8,12 +8,12 @@ abstract class HomePageEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ListGamesEvent extends HomePageEvent {
+class GamesListEvent extends HomePageEvent {
   final int limit;
   final int offset;
   final int idPlatform;
 
-  const ListGamesEvent({
+  const GamesListEvent({
     required this.limit,
     required this.offset,
     required this.idPlatform,

@@ -17,11 +17,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     required GamesListRepository gamesRepository,
   })  : _gamesRepository = gamesRepository,
         super(HomePageInitial()) {
-    on<ListGamesEvent>(_getListGames);
+    on<GamesListEvent>(_getListGames);
   }
 
   FutureOr<void> _getListGames(
-    ListGamesEvent event,
+    GamesListEvent event,
     Emitter<HomePageState> emit,
   ) async {
     emit(

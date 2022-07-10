@@ -1,15 +1,18 @@
 // import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
+import 'package:game/app/utils/utils.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
 import 'package:game/data/services/dio/dio.dart';
 
+import 'bloc/home_page_bloc.dart';
 import 'components/components.dart';
 import 'home_controller.dart';
 
@@ -21,6 +24,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late HomePageBloc xbox;
+  late HomePageBloc nintendo;
+  late HomePageBloc browser;
+  late HomePageBloc playStation;
+  late HomePageBloc pc;
+
   // ignore: unused_field
   final _games = <GameModel>[];
 
@@ -33,11 +42,36 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    xbox = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.xbox);
+    nintendo = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.nintendo);
+    browser = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.browser);
+    playStation = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.playStation);
+    pc = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.pc);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // ignore: unused_local_variable
       var controller = _controller.fetch();
       // developer.log(controller.toString());
     });
+  }
+
+  @override
+  void dispose() {
+    xbox.close();
+    nintendo.close();
+    browser.close();
+    playStation.close();
+    pc.close();
+    super.dispose();
   }
 
   @override

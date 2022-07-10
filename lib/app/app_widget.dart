@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game/data/services/games/games_list_service.dart';
-import 'package:game/data/services/games/games_list_service_impl.dart';
 import 'package:provider/provider.dart';
 
 import 'package:game/data/repositories/games/games.dart';
-import 'package:game/data/services/dio/dio_service.dart';
-import 'package:game/data/services/dio/dio_service_impl.dart';
+import 'package:game/data/services/dio/dio.dart';
+import 'package:game/data/services/games/games.dart';
 
 import 'config/pages/pages.dart';
 import 'config/routes/routes.dart';
@@ -31,13 +29,13 @@ class AppWidget extends StatelessWidget {
             dioService: context.read<DioService>(),
           ),
         ),
-        BlocProvider(
-          create: (context) => HomePageBloc(
+        Provider<GamesListService>(
+          create: (context) => GamesListServiceImpl(
             gamesRepository: context.read<GamesListRepository>(),
           ),
         ),
-        Provider<GamesListService>(
-          create: (context) => GamesListServiceImpl(
+        BlocProvider(
+          create: (context) => HomePageBloc(
             gamesRepository: context.read<GamesListRepository>(),
           ),
         ),
