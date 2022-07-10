@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:game/data/models/game/game_model.dart';
-import 'package:game/data/repositories/games_list_repository.dart';
+import 'package:game/data/repositories/games/games.dart';
 
 class HomeController {
   final GamesListRepository _gamesRepository;

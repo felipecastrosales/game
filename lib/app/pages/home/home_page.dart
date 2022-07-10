@@ -7,12 +7,10 @@ import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/models/game/game_model.dart';
-import 'package:game/data/repositories/games_list_repository_impl.dart';
-import 'package:game/data/services/dio/dio_service_impl.dart';
+import 'package:game/data/repositories/games/games.dart';
+import 'package:game/data/services/dio/dio.dart';
 
-import 'components/category_tile.dart';
-import 'components/game_tile.dart';
-import 'components/headers.dart';
+import 'components/components.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:game/data/models/game/game_model.dart';
-import 'package:game/data/repositories/games_list_repository.dart';
+import 'package:game/data/repositories/games/games.dart';
 
-import './games_list_service.dart';
+import 'games.dart';
 
 class GamesListServiceImpl implements GamesListService {
   final GamesListRepository _gamesRepository;

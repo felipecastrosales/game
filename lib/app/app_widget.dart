@@ -4,8 +4,7 @@ import 'package:game/data/services/games/games_list_service.dart';
 import 'package:game/data/services/games/games_list_service_impl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:game/data/repositories/games_list_repository.dart';
-import 'package:game/data/repositories/games_list_repository_impl.dart';
+import 'package:game/data/repositories/games/games.dart';
 import 'package:game/data/services/dio/dio_service.dart';
 import 'package:game/data/services/dio/dio_service_impl.dart';
 

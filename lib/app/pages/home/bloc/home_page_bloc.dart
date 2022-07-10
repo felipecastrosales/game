@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'package:game/data/models/game/game_model.dart';
-import 'package:game/data/repositories/games_list_repository.dart';
+import 'package:game/data/repositories/games/games.dart';
 
 part 'home_page_event.dart';
 part 'home_page_state.dart';
