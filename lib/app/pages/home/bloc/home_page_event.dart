@@ -18,4 +18,9 @@ class GamesListEvent extends HomePageEvent {
     required this.offset,
     required this.idPlatform,
   });
+
+  const GamesListEvent.id({
+    required this.idPlatform,
+  })  : limit = 10,
+        offset = 10;
 }
