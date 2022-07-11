@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game/app/core/text/app_texts.dart';
 import 'package:provider/provider.dart';
 
+import 'package:game/app/core/text/app_texts.dart';
 import 'package:game/data/repositories/games/games.dart';
 import 'package:game/data/services/dio/dio.dart';
 import 'package:game/data/services/games/games.dart';
@@ -20,14 +20,11 @@ class AppWidget extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(
-          create: (_) {},
-        ),
-        Provider(
           create: (context) => DioServiceImpl(),
         ),
         Provider<GamesListRepository>(
           create: (context) => GamesListRepositoryImpl(
-            dioService: context.read<DioService>(),
+            dioService: context.read<DioServiceImpl>(),
           ),
         ),
         Provider<GamesListService>(

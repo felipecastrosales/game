@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/text.dart';
-import 'package:game/app/utils/utils.dart';
+import 'package:game/app/utils/games_list_event_utils.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
     pc = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.pc);
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // ignore: unused_local_variable
       var controller = _controller.fetch();

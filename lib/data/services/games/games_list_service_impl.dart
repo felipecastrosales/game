@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
 
@@ -16,10 +18,18 @@ class GamesListServiceImpl implements GamesListService {
     required int offset,
     required int idPlatform,
   }) {
-    return _gamesRepository.getGamesList(
-      idPlatform: idPlatform,
-      offset: offset,
-      limit: limit,
-    );
+    try {
+      return _gamesRepository.getGamesList(
+        idPlatform: idPlatform,
+        offset: offset,
+        limit: limit,
+      );
+    } on Exception { // pass CustomException
+      rethrow;
+    } catch (e, s) {
+      developer.log('$e', name: 'Dio Error');
+      developer.log('$s', name: 'Dio StackTrace');
+      throw Exception('Error to load GamesListService');
+    }
   }
 }

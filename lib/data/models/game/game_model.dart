@@ -1,33 +1,108 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
+import 'package:game/data/models/genre/genre_model.dart';
+import 'package:game/data/models/platform/platform_model.dart';
+
 class GameModel {
   final int id;
   final String name;
   final String? screenshots;
   final String? summary;
-  final List<String?>? genres;
-  final List<String?> platforms;
+  final List<GenreModel>? genres;
+  final List<PlatformModel>? platforms;
 
-  const GameModel({
+  GameModel({
     required this.id,
     required this.name,
-    required this.summary,
-    required this.screenshots,
-    required this.genres,
-    required this.platforms,
+    this.screenshots,
+    this.summary,
+    this.genres,
+    this.platforms,
   });
 
-  factory GameModel.fromJson(Map<String, dynamic> json) {
+  GameModel copyWith({
+    int? id,
+    String? name,
+    String? screenshots,
+    String? summary,
+    List<GenreModel>? genres,
+    List<PlatformModel>? platforms,
+  }) {
     return GameModel(
-      id: json['id'],
-      name: json['name'] ?? '',
-      summary: json['summary'] ?? '',
-      screenshots: json['screenshots']
-          ?.firstWhere((image) => image != null, orElse: () => ['']),
-      genres:
-          json['genres'].map<String?>((genre) => genre['name']).toList() ?? [],
-      platforms: json['platforms']
-              .map<String?>((platform) => platform['name'])
-              .toList() ??
-          [],
+      id: id ?? this.id,
+      name: name ?? this.name,
+      screenshots: screenshots ?? this.screenshots,
+      summary: summary ?? this.summary,
+      genres: genres ?? this.genres,
+      platforms: platforms ?? this.platforms,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'screenshots': screenshots,
+      'summary': summary,
+      'genres': genres?.map((genre) => genre.toMap()).toList(),
+      'platforms': platforms?.map((platform) => platform.toMap()).toList(),
+    };
+  }
+
+  factory GameModel.fromMap(Map<String, dynamic> map) {
+    String getScreenshots(List<dynamic> images) {
+      return images.first['url'];
+    }
+
+    return GameModel(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      screenshots:
+          map['screenshots'] != null ? getScreenshots(map['screenshots']) : '',
+      summary: map['summary'],
+      genres: map['genres'] != null
+          ? List<GenreModel>.from(
+              map['genres']?.map((genre) => GenreModel.fromMap(genre)))
+          : null,
+      platforms: map['platforms'] != null
+          ? List<PlatformModel>.from(map['platforms']
+              ?.map((platform) => PlatformModel.fromMap(platform)))
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory GameModel.fromJson(String source) =>
+      GameModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'GameModel(id: $id, name: $name, screenshots: $screenshots, summary: $summary, genres: $genres, platforms: $platforms)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is GameModel &&
+        other.id == id &&
+        other.name == name &&
+        other.screenshots == screenshots &&
+        other.summary == summary &&
+        listEquals(other.genres, genres) &&
+        listEquals(other.platforms, platforms);
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        screenshots.hashCode ^
+        summary.hashCode ^
+        genres.hashCode ^
+        platforms.hashCode;
   }
 }
