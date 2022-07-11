@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:game/app/core/colors/app_colors.dart';
-import 'package:game/app/core/text/app_text_styles.dart';
+import 'package:game/app/core/text/text.dart';
 
 class Headers extends StatelessWidget {
   final String title;

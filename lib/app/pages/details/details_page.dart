@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game/app/core/text/app_text_styles.dart';
+import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/constants.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 

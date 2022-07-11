@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
-import 'package:game/app/core/text/app_text_styles.dart';
+import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/utils.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/models/game/game_model.dart';
@@ -81,14 +81,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Game App',
+          AppTexts.appTitleName,
           style: AppTextStyles.appBar,
         ),
       ),
       body: Column(
         children: [
           const Headers(
-            title: 'Categorias',
+            title: AppTexts.headersCategories,
             icon: Icons.category,
           ),
           Container(
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
             child: CustomDivider(2),
           ),
           const Headers(
-            title: 'Jogos',
+            title: AppTexts.headersGames,
             icon: Icons.videogame_asset,
           ),
           // Expanded(

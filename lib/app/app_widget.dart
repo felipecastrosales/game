@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game/app/core/text/app_texts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:game/data/repositories/games/games.dart';
@@ -41,7 +42,7 @@ class AppWidget extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Game App',
+        title: AppTexts.appTitleName,
         theme: AppThemes.light,
         initialRoute: Pages.home,
         routes: Routes.getRoutes(),
