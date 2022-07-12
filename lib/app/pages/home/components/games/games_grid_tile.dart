@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/pages/details/details_page.dart';
 import 'package:game/app/pages/home/bloc/home_page_bloc.dart';
 import 'package:game/app/pages/home/components/components.dart';
 import 'package:game/data/constants/constants_api.dart';
@@ -74,9 +75,17 @@ class _GamesGridTileState extends State<GamesGridTile>
                       ConstantsAPI.http + _games[index].screenshots!;
                   final title = _games[index].name;
 
-                  return GamesCardItem(
-                    imageUrl: imageUrl,
-                    title: title,
+                  return InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsPage(game: _games[index]),
+                      ),
+                    ),
+                    child: GamesCardItem(
+                      imageUrl: imageUrl,
+                      title: title,
+                    ),
                   );
                 },
               ),

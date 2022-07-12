@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/constants.dart';
 import 'package:game/app/widgets/custom_divider.dart';
+import 'package:game/data/models/game/game_model.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  final GameModel game;
+
+  const DetailsPage({
+    Key? key,
+    required this.game,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
