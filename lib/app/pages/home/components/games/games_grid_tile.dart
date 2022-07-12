@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/pages/home/bloc/home_page_bloc.dart';
 import 'package:game/app/pages/home/components/components.dart';
 import 'package:game/data/constants/constants_api.dart';
@@ -20,8 +21,27 @@ class GamesGridTile extends StatefulWidget {
   State<GamesGridTile> createState() => _GamesGridTileState();
 }
 
-class _GamesGridTileState extends State<GamesGridTile> {
+class _GamesGridTileState extends State<GamesGridTile>
+    with SingleTickerProviderStateMixin {
   final _games = <GameModel>[];
+  late AnimationController _animationController;
+  bool expanded = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+      reverseDuration: const Duration(milliseconds: 500),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +85,13 @@ class _GamesGridTileState extends State<GamesGridTile> {
                 ? const SizedBox.shrink()
                 : InkWell(
                     onTap: () {
+                      setState(() {
+                        expanded
+                            ? _animationController.forward()
+                            : _animationController.reverse();
+                        expanded = !expanded;
+                      });
+
                       widget.homePageBloc.add(
                         GamesListEvent(
                           limit: _games.length + 6,
@@ -73,9 +100,16 @@ class _GamesGridTileState extends State<GamesGridTile> {
                         ),
                       );
                     },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Icon(Icons.add, size: 30),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16, bottom: 24),
+                      child: Center(
+                        child: AnimatedIcon(
+                          icon: AnimatedIcons.add_event,
+                          progress: _animationController,
+                          color: AppColors.dark,
+                          size: 50,
+                        ),
+                      ),
                     ),
                   ),
           ],
