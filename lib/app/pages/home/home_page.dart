@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/core/colors/app_colors.dart';
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/utils.dart';
-import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
 import 'package:game/data/services/dio/dio.dart';
@@ -51,12 +49,12 @@ class _HomePageState extends State<HomePage> {
     browser = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.browser);
-    playStation = HomePageBloc(
-      gamesRepository: context.read<GamesListRepository>(),
-    )..add(GamesListEventUtils.playStation);
     pc = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.pc);
+    playStation = HomePageBloc(
+      gamesRepository: context.read<GamesListRepository>(),
+    )..add(GamesListEventUtils.playStation);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // ignore: unused_local_variable
@@ -70,8 +68,8 @@ class _HomePageState extends State<HomePage> {
     xbox.close();
     nintendo.close();
     browser.close();
-    playStation.close();
     pc.close();
+    playStation.close();
     super.dispose();
   }
 
@@ -90,58 +88,42 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           bottom: const CategoryTab(),
         ),
-        body: Column(
+        body: TabBarView(
           children: [
-            const Headers(
-              title: AppTexts.headersCategories,
-              icon: Icons.category,
+            GamesTabItem(
+              bloc: xbox,
+              games: _games,
+              homePageBloc: xbox,
+              listener: _controller.handleStateUpdate,
+              idPlatform: 49,
             ),
-            Container(
-              height: 50,
-              padding: const EdgeInsets.only(left: 8),
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                separatorBuilder: (_, __) => const SizedBox(width: 8),
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    name: 'Game $index',
-                    isSelected: true,
-                    onTap: () {},
-                  );
-                },
-              ),
+            GamesTabItem(
+              bloc: nintendo,
+              games: _games,
+              homePageBloc: nintendo,
+              listener: _controller.handleStateUpdate,
+              idPlatform: 130,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: CustomDivider(2),
+            GamesTabItem(
+              bloc: pc,
+              games: _games,
+              homePageBloc: pc,
+              listener: _controller.handleStateUpdate,
+              idPlatform: 6,
             ),
-            const Headers(
-              title: AppTexts.headersGames,
-              icon: Icons.videogame_asset,
+            GamesTabItem(
+              bloc: browser,
+              games: _games,
+              homePageBloc: browser,
+              listener: _controller.handleStateUpdate,
+              idPlatform: 82,
             ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: GridView.builder(
-                  itemCount: 20,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 4 / 5,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GameTile(
-                      image: '$index',
-                      text: 'Game $index',
-                      onTap: () {
-                        Navigator.pushNamed(context, Pages.details);
-                      },
-                    );
-                  },
-                ),
-              ),
+            GamesTabItem(
+              bloc: playStation,
+              games: _games,
+              homePageBloc: playStation,
+              listener: _controller.handleStateUpdate,
+              idPlatform: 48,
             ),
           ],
         ),
