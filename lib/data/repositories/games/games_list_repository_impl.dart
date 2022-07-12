@@ -2,6 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:dio/dio.dart';
 
+import 'package:game/app/core/error/exception/exception.dart';
 import 'package:game/data/constants/constants_api.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/services/dio/dio_service.dart';
@@ -50,16 +51,18 @@ class GamesListRepositoryImpl implements GamesListRepository {
         return <GameModel>[];
       }
     } on DioError catch (e, s) {
-      if (e.response?.statusCode == 429) {
-        throw Exception('Many accesses');
+      var errorStatusCode = e.response?.statusCode;
+      if (errorStatusCode == 429) {
+        throw TooManyRequestsException('Many Request happening.');
       }
+      developer.log('$errorStatusCode', name: 'errorStatusCode');
       developer.log('$e', name: 'Dio Error');
       developer.log('$s', name: 'Dio StackTrace');
-      throw Exception('Error on DioError');
+      throw ServerException('Exception on server');
     } catch (e, s) {
       developer.log('$e', name: 'Error');
       developer.log('$s', name: 'StackTrace');
-      throw Exception('Error to load GamesListRepository');
+      throw ServerException('Exception when load Games List');
     }
   }
 }
