@@ -17,8 +17,8 @@ class AppTextStyles {
   );
 
   static final categorySelected = GoogleFonts.nunito(
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
     color: AppColors.text,
   );
 

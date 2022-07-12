@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+
+import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/text/text.dart';
+import 'package:game/app/pages/home/components/components.dart';
+
+class CategoryTab extends StatelessWidget with PreferredSizeWidget {
+  const CategoryTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      isScrollable: true,
+      indicatorPadding: EdgeInsets.zero,
+      indicatorSize: TabBarIndicatorSize.label,
+      padding: EdgeInsets.zero,
+      labelPadding: EdgeInsets.zero,
+      labelColor: AppColors.primary,
+      labelStyle: AppTextStyles.categorySelected,
+      unselectedLabelColor: AppColors.backgroundDark,
+      unselectedLabelStyle: AppTextStyles.categoryUnselected,
+      indicator: const BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      tabs: const [
+        CategoryItem(AppTexts.xbox),
+        CategoryItem(AppTexts.nintendo),
+        CategoryItem(AppTexts.browser),
+        CategoryItem(AppTexts.pc),
+        CategoryItem(AppTexts.ps4),
+      ],
+    );
+  }
+}
