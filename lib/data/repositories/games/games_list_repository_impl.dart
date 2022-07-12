@@ -22,12 +22,11 @@ class GamesListRepositoryImpl implements GamesListRepository {
     required int offset,
     required int idPlatform,
   }) async {
+    var dio = _dioService.getDio();
+    const baseGamesUrl = ConstantsAPI.game;
     try {
-      var dio = _dioService.getDio();
-      const baseUrl = ConstantsAPI.game;
-      // var queryData = ConstantsAPI.queryData;
       final response = await dio.post(
-        baseUrl,
+        baseGamesUrl,
         data: '''
           fields id, name, platforms, summary, screenshots.url, genres.name, platforms.name;
           where platforms = $idPlatform;

@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:game/app/core/error/exception/exception.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
 
@@ -24,12 +25,12 @@ class GamesListServiceImpl implements GamesListService {
         offset: offset,
         limit: limit,
       );
-    } on Exception { // pass CustomException
+    } on TooManyRequestsException {
       rethrow;
     } catch (e, s) {
       developer.log('$e', name: 'Dio Error');
       developer.log('$s', name: 'Dio StackTrace');
-      throw Exception('Error to load GamesListService');
+      throw ServerException('Exception when load Games List');
     }
   }
 }
