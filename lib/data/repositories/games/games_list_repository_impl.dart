@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 import 'package:dio/dio.dart';
 
 import 'package:game/app/core/error/exception/exception.dart';
-import 'package:game/data/constants/constants_api.dart';
+import 'package:game/data/constants/constants.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/services/dio/dio_service.dart';
 

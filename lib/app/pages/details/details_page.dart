@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/widgets/widgets.dart';
-import 'package:game/data/constants/constants_api.dart';
+import 'package:game/data/constants/constants.dart';
 import 'package:game/data/models/game/game_model.dart';
 
 class DetailsPage extends StatefulWidget {

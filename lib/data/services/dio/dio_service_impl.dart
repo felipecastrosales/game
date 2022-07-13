@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'package:game/data/constants/constants_api.dart';
+import 'package:game/data/constants/constants.dart';
 
 import 'dio_service.dart';
 

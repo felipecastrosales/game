@@ -5,7 +5,7 @@ import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/pages/details/details_page.dart';
 import 'package:game/app/pages/home/bloc/home_page_bloc.dart';
 import 'package:game/app/pages/home/components/components.dart';
-import 'package:game/data/constants/constants_api.dart';
+import 'package:game/data/constants/constants.dart';
 import 'package:game/data/models/game/game_model.dart';
 
 class GamesGridTile extends StatefulWidget {
