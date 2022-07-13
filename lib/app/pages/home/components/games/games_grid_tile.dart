@@ -115,7 +115,7 @@ class _GamesGridTileState extends State<GamesGridTile>
                         child: AnimatedIcon(
                           icon: AnimatedIcons.add_event,
                           progress: _animationController,
-                          color: AppColors.dark,
+                          color: AppColors.primary,
                           size: 50,
                         ),
                       ),
