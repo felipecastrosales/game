@@ -41,7 +41,27 @@ class _DetailsPageState extends State<DetailsPage> {
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
-                // imageBuilder: (context, imageProvider) => Container(),
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  foregroundDecoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black26,
+                        Colors.transparent,
+                        Colors.transparent,
+                        Colors.black54,
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0, 0.1, 0.8, 1],
+                    ),
+                  ),
+                ),
                 errorWidget: (_, __, ___) => const Center(
                   child: Icon(
                     Icons.error,
