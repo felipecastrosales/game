@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/core/text/text.dart';
 
 class CategoryTile extends StatelessWidget {

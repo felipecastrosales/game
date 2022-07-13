@@ -14,4 +14,7 @@ class AppTexts {
   static const pc = 'PC';
   static const browser = 'Browser';
   static const ps4 = 'PS4';
+
+  // Generals
+  static const bulletPoint = '\u2022';
 }

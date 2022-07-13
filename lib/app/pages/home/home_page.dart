@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/utils.dart';
 import 'package:game/data/models/game/game_model.dart';

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:game/app/core/text/text.dart';
+import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/widgets/custom_divider.dart';
 import 'package:game/data/constants/constants_api.dart';
 import 'package:game/data/models/game/game_model.dart';
@@ -22,7 +23,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     final imageUrl = ConstantsAPI.http + widget.game.screenshots!;
-    String bulletPoint = '\u2022';
+    var bulletPoint = AppTexts.bulletPoint;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +35,7 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 300,
@@ -50,12 +52,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                   foregroundDecoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [
-                        Colors.black26,
-                        Colors.transparent,
-                        Colors.transparent,
-                        Colors.black54,
-                      ],
+                      colors: AppListColor.linearDetailsImage,
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       stops: [0, 0.1, 0.8, 1],
@@ -80,27 +77,40 @@ class _DetailsPageState extends State<DetailsPage> {
                   Text(
                     widget.game.name,
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.gameTitle,
+                    style: AppTextStyles.gameTitleDetails,
                   ),
                   const SizedBox(height: 8),
                   (widget.game.genres == null)
-                      ? const Text('There are no genres.')
+                      ? Text(
+                          '| There are no genres |',
+                          style: AppTextStyles.gameGenres,
+                        )
                       : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: widget.game.genres!
                               .map(
                                 (game) => Text(
                                   '$bulletPoint ${game.name}',
-                                  style: AppTextStyles.gameDetails,
+                                  style: AppTextStyles.gameGenres,
                                 ),
                               )
                               .toList(),
                         ),
-                  const SizedBox(height: 16),
-                  Text(
-                    widget.game.summary!,
-                    style: AppTextStyles.gameDetails,
+                  const SizedBox(height: 8),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: CustomDivider(1),
                   ),
-                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Text(
+                      widget.game.summary!,
+                      style: AppTextStyles.gameDetails,
+                    ),
+                  ),
                 ],
               ),
             ),

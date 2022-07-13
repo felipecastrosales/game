@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/colors/colors.dart';
 
 class AppTextStyles {
   static final appBar = GoogleFonts.nunito(
@@ -31,6 +31,18 @@ class AppTextStyles {
   static final gameTitle = GoogleFonts.nunito(
     fontSize: 16,
     fontWeight: FontWeight.bold,
+    color: AppColors.text,
+  );
+
+  static final gameTitleDetails = GoogleFonts.nunito(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.text,
+  );
+
+  static final gameGenres = GoogleFonts.nunito(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
     color: AppColors.text,
   );
 

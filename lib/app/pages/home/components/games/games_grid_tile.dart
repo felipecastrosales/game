@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/pages/details/details_page.dart';
 import 'package:game/app/pages/home/bloc/home_page_bloc.dart';
 import 'package:game/app/pages/home/components/components.dart';

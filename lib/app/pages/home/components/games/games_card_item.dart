@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'package:game/app/core/colors/app_colors.dart';
+import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
 
 class GamesCardItem extends StatelessWidget {
