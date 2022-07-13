@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/core/text/app_text_styles.dart';
+import 'package:game/app/widgets/widgets.dart';
 
 class GamesCardItem extends StatelessWidget {
   final String imageUrl;
@@ -39,6 +40,7 @@ class GamesCardItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.cover,
+              errorWidget: (_, __, ___) => const CustomErrorWidget(),
               imageBuilder: (context, imageProvider) => DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
@@ -50,15 +52,6 @@ class GamesCardItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),
-              errorWidget: (_, __, ___) => const Center(
-                child: Icon(
-                  Icons.error,
-                  color: Colors.red,
-                ),
-              ),
-              placeholder: (_, __) => const Center(
-                child: CircularProgressIndicator.adaptive(),
               ),
             ),
           ),

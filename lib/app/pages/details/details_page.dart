@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/core/colors/colors.dart';
-import 'package:game/app/widgets/custom_divider.dart';
+import 'package:game/app/widgets/widgets.dart';
 import 'package:game/data/constants/constants_api.dart';
 import 'package:game/data/models/game/game_model.dart';
 
@@ -43,6 +43,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
+                errorWidget: (_, __, ___) => const CustomErrorWidget(),
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -57,12 +58,6 @@ class _DetailsPageState extends State<DetailsPage> {
                       end: Alignment.bottomCenter,
                       stops: [0, 0.1, 0.8, 1],
                     ),
-                  ),
-                ),
-                errorWidget: (_, __, ___) => const Center(
-                  child: Icon(
-                    Icons.error,
-                    color: Colors.red,
                   ),
                 ),
               ),
@@ -107,7 +102,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       vertical: 8,
                     ),
                     child: Text(
-                      widget.game.summary!,
+                      widget.game.summary ?? '',
                       style: AppTextStyles.gameDetails,
                     ),
                   ),
