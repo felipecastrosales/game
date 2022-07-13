@@ -14,6 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_native_splash: ^2.2.4
   google_fonts: ^3.0.1
   loading_animation_widget: ^1.2.0+2
   provider: ^6.0.3
@@ -26,3 +27,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+
+flutter_icons:
+  ios: true
+  web: true
+  macos: true
+  linux: true
+  android: true
+  windows: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo-golden.png"
