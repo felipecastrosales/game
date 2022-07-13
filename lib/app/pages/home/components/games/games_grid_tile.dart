@@ -9,14 +9,14 @@ import 'package:game/data/constants/constants_api.dart';
 import 'package:game/data/models/game/game_model.dart';
 
 class GamesGridTile extends StatefulWidget {
+  final HomePageBloc homePageBloc;
+  final int idPlatform;
+
   const GamesGridTile(
     this.homePageBloc,
     this.idPlatform, {
     Key? key,
   }) : super(key: key);
-
-  final HomePageBloc homePageBloc;
-  final int idPlatform;
 
   @override
   State<GamesGridTile> createState() => _GamesGridTileState();

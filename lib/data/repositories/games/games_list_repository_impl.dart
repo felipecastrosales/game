@@ -55,12 +55,12 @@ class GamesListRepositoryImpl implements GamesListRepository {
         throw TooManyRequestsException('Many Request happening.');
       }
       developer.log('$errorStatusCode', name: 'errorStatusCode');
-      developer.log('$e', name: 'Dio Error');
-      developer.log('$s', name: 'Dio StackTrace');
+      developer.log('$e', name: 'Dio Error', stackTrace: s);
+      developer.log('$s', name: 'Dio StackTrace', stackTrace: s);
       throw ServerException('Exception on server');
     } catch (e, s) {
-      developer.log('$e', name: 'Error');
-      developer.log('$s', name: 'StackTrace');
+      developer.log('$e', name: 'Error', stackTrace: s);
+      developer.log('$s', name: 'StackTrace', stackTrace: s);
       throw ServerException('Exception when load Games List');
     }
   }

@@ -6,27 +6,29 @@ import 'package:game/app/pages/home/components/components.dart';
 import 'package:game/data/models/game/game_model.dart';
 
 class GamesTabItem<B extends StateStreamable<S>, S> extends StatelessWidget {
+  final B bloc;
+  final BlocWidgetListener<S> listener;
+  final int idPlatform;
+  final List<GameModel> games;
+
   const GamesTabItem({
     Key? key,
     required this.bloc,
-    required this.homePageBloc,
     required this.listener,
     required this.idPlatform,
-    required List<GameModel> games,
+    required this.games,
   }) : super(key: key);
-
-  final B bloc;
-  final HomePageBloc homePageBloc;
-  final BlocWidgetListener<S> listener;
-  final int idPlatform;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-      bloc: bloc,
+      bloc: bloc, // B
       listener: listener,
       builder: (context, state) {
-        return GamesGridTile(homePageBloc, idPlatform);
+        return GamesGridTile(
+          bloc as HomePageBloc, // HomePageBloc
+          idPlatform,
+        );
       },
     );
   }

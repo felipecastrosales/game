@@ -22,6 +22,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     final imageUrl = ConstantsAPI.http + widget.game.screenshots!;
+    String bulletPoint = '\u2022';
 
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +41,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
+                // imageBuilder: (context, imageProvider) => Container(),
                 errorWidget: (_, __, ___) => const Center(
                   child: Icon(
                     Icons.error,
@@ -61,15 +63,18 @@ class _DetailsPageState extends State<DetailsPage> {
                     style: AppTextStyles.gameTitle,
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    widget.game.genres
-                            ?.map((game) => '• ${game.name}')
-                            .toList()
-                            .join(',\n') ??
-                        'Does not have genders.',
-                    style: AppTextStyles.gameDetails,
-                    textAlign: TextAlign.start,
-                  ),
+                  (widget.game.genres == null)
+                      ? const Text('There are no genres.')
+                      : Column(
+                          children: widget.game.genres!
+                              .map(
+                                (game) => Text(
+                                  '$bulletPoint ${game.name}',
+                                  style: AppTextStyles.gameDetails,
+                                ),
+                              )
+                              .toList(),
+                        ),
                   const SizedBox(height: 16),
                   Text(
                     widget.game.summary!,

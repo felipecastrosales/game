@@ -28,8 +28,8 @@ class GamesListServiceImpl implements GamesListService {
     } on TooManyRequestsException {
       rethrow;
     } catch (e, s) {
-      developer.log('$e', name: 'Dio Error');
-      developer.log('$s', name: 'Dio StackTrace');
+      developer.log('$e', name: 'Dio Error', stackTrace: s);
+      developer.log('$s', name: 'Dio StackTrace', stackTrace: s);
       throw ServerException('Exception when load Games List');
     }
   }
