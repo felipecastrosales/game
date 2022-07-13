@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:game/app/core/text/text.dart';
-import 'package:game/app/utils/constants.dart';
 import 'package:game/app/widgets/custom_divider.dart';
+import 'package:game/data/constants/constants_api.dart';
 import 'package:game/data/models/game/game_model.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   final GameModel game;
 
   const DetailsPage({
@@ -14,45 +15,67 @@ class DetailsPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
+  @override
   Widget build(BuildContext context) {
+    final imageUrl = ConstantsAPI.http + widget.game.screenshots!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Details Page',
+          widget.game.name,
           style: AppTextStyles.appBar,
+          textAlign: TextAlign.center,
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 500,
-              child: Placeholder(),
+            SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+                errorWidget: (_, __, ___) => const Center(
+                  child: Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             const CustomDivider(2),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
                   Text(
-                    'Title',
+                    widget.game.name,
                     textAlign: TextAlign.center,
                     style: AppTextStyles.gameTitle,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Category',
+                    widget.game.genres
+                            ?.map((game) => '• ${game.name}')
+                            .toList()
+                            .join(',\n') ??
+                        'Does not have genders.',
                     style: AppTextStyles.gameDetails,
+                    textAlign: TextAlign.start,
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    Constants.loremIpsum,
+                    widget.game.summary!,
                     style: AppTextStyles.gameDetails,
                   ),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
