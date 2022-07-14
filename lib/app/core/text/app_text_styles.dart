@@ -46,6 +46,14 @@ class AppTextStyles {
     color: AppColors.text,
   );
 
+
+  static final gamePlatforms = GoogleFonts.nunito(
+    fontSize: 15,
+    fontWeight: FontWeight.w800,
+    color: AppColors.text,
+  );
+
+
   static final gameDetails = GoogleFonts.nunito(
     fontSize: 14,
     fontWeight: FontWeight.w700,

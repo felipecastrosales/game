@@ -1,12 +1,12 @@
 import 'package:game/data/models/game/game_model.dart';
-import 'package:game/data/repositories/sqlite/sqlite_games_repository_impl.dart';
+import 'package:game/data/repositories/sqlite/sqlite.dart';
 
 import 'sqlite_games_service.dart';
 
 class SqliteGamesServiceImpl implements SqliteGamesService {
-  final SqliteGamesRepositoryImpl _gamesSqliteRepository;
+  final SqliteGamesRepository _gamesSqliteRepository;
   SqliteGamesServiceImpl({
-    required SqliteGamesRepositoryImpl gamesSqliteRepository,
+    required SqliteGamesRepository gamesSqliteRepository,
   }) : _gamesSqliteRepository = gamesSqliteRepository;
 
   @override

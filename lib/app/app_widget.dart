@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game/data/repositories/sqlite/sqlite_games_repository_impl.dart';
+import 'package:game/data/repositories/sqlite/sqlite_games_repository.dart';
 import 'package:provider/provider.dart';
 
 import 'package:game/app/core/text/app_texts.dart';
@@ -10,6 +10,8 @@ import 'package:game/data/services/dio/dio.dart';
 import 'package:game/data/services/games/games.dart';
 import 'package:game/data/services/sqlite/sqlite_games_service_impl.dart';
 
+import '../data/repositories/sqlite/sqlite_games_repository_impl.dart';
+import '../data/services/sqlite/sqlite_games_service.dart';
 import 'config/pages/pages.dart';
 import 'config/routes/routes.dart';
 import 'core/theme/app_themes.dart';
@@ -23,47 +25,45 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(
+        Provider<DioService>(
           create: (context) => DioServiceImpl(),
+          lazy: false,
         ),
         Provider<SqliteConnectionFactory>(
           create: (context) => SqliteConnectionFactory(),
           lazy: false,
         ),
-        Provider<SqliteGamesRepositoryImpl>(
+        Provider<SqliteGamesRepository>(
           create: (context) => SqliteGamesRepositoryImpl(
-            sqliteConnectionFactory: context.read<SqliteConnectionFactory>(),
+            sqliteConnectionFactory: context.read(),
           ),
           lazy: false,
         ),
-        Provider(
+        Provider<SqliteGamesService>(
           create: (context) => SqliteGamesServiceImpl(
-            gamesSqliteRepository: context.read<SqliteGamesRepositoryImpl>(),
+            gamesSqliteRepository: context.read(),
           ),
           lazy: false,
         ),
         Provider<GamesListRepository>(
           create: (context) => GamesListRepositoryImpl(
-            dioService: context.read<DioServiceImpl>(),
-            sqliteGamesService: context.read<SqliteGamesServiceImpl>(),
+            dioService: context.read(),
+            sqliteGamesService: context.read(),
           ),
         ),
         Provider<GamesListService>(
           create: (context) => GamesListServiceImpl(
-            gamesRepository: context.read<GamesListRepository>(),
-          ),
-        ),
-        BlocProvider(
-          create: (context) => HomePageBloc(
-            gamesRepository: context.read<GamesListRepository>(),
+            gamesRepository: context.read(),
           ),
         ),
         ChangeNotifierProvider(
           create: (context) => HomeController(
-            GamesListRepositoryImpl(
-              dioService: context.read<DioServiceImpl>(),
-              sqliteGamesService: context.read<SqliteGamesServiceImpl>(),
-            ),
+            context.read(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => HomePageBloc(
+            gamesRepository: context.read(),
           ),
         ),
       ],

@@ -14,7 +14,7 @@ class MigrationV1 implements Migration {
   @override
   void create(Batch batch) {
     batch.execute('''
-      create table games(
+      create table GAMES(
         $id integer primary key autoincrement,
         $name text not null,
         $screenshots text not null,

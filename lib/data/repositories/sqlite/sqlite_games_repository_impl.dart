@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:game/data/datasource/database/sqlite/sqlite.dart';
 import 'package:game/data/models/game/game_model.dart';
 
@@ -23,7 +25,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     final connection = await _sqliteConnectionFactory.openConnection();
     final result = await connection.rawQuery(
       '''
-        SELECT * FROM games WHERE id = ?;
+        SELECT * FROM GAMES WHERE id = ?;
       ''',
       [games.id],
     );
@@ -42,10 +44,12 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
           {
             'id': game.id,
             'name': game.name,
-            'screenshots': game.screenshots,
-            'summary': game.summary,
-            'genres': game.genres,
-            'platforms': game.platforms,
+            'screenshots': game.screenshots ?? '',
+            'summary': game.summary ?? '',
+            'genres': json
+                .encode((game.genres ?? []).map((e) => e.toJson()).toList()),
+            'platforms': json
+                .encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
           },
         );
       }
@@ -55,12 +59,6 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
   @override
   Future<void> updateGame({required GameModel game}) async {
     final connection = await _sqliteConnectionFactory.openConnection();
-    // final result = await connection.rawQuery(
-    //   '''
-    //     SELECT * from GAMES where id = ?
-    //   ''',
-    //   [game.id],
-    // );
 
     await connection.rawUpdate(
       '''
@@ -74,10 +72,10 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
       ''',
       [
         game.name,
-        game.screenshots,
-        game.summary,
-        game.genres,
-        game.platforms,
+        game.screenshots ?? '',
+        game.summary ?? '',
+        json.encode((game.genres ?? []).map((e) => e.toJson()).toList()),
+        json.encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
         game.id,
       ],
     );

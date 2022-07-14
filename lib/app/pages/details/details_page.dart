@@ -91,18 +91,17 @@ class _DetailsPageState extends State<DetailsPage> {
                               )
                               .toList(),
                         ),
-
                   (widget.game.platforms == null)
                       ? Text(
-                          '| There are no genres |',
-                          style: AppTextStyles.gameGenres,
+                          '| There are no plaforms available |',
+                          style: AppTextStyles.gamePlatforms,
                         )
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: widget.game.platforms!
                               .map(
                                 (game) => Text(
-                                  '$bulletPoint ${game.name}',
+                                  game.name,
                                   style: AppTextStyles.gameGenres,
                                 ),
                               )
