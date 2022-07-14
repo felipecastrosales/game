@@ -20,10 +20,9 @@ class MigrationV1 implements Migration {
         $screenshots text not null,
         $summary text not null,
         $genres text not null,
-        $platforms text not null,
+        $platforms text not null
       );
     ''');
-    // idPlatform integer not null,
   }
 
   @override
