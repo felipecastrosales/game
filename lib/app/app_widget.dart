@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game/data/repositories/sqlite/sqlite_games_repository_impl.dart';
 import 'package:provider/provider.dart';
 
 import 'package:game/app/core/text/app_texts.dart';
@@ -25,8 +26,20 @@ class AppWidget extends StatelessWidget {
         Provider(
           create: (context) => DioServiceImpl(),
         ),
+        Provider<SqliteConnectionFactory>(
+          create: (context) => SqliteConnectionFactory(),
+          lazy: false,
+        ),
+        Provider<SqliteGamesRepositoryImpl>(
+          create: (context) => SqliteGamesRepositoryImpl(
+            sqliteConnectionFactory: context.read<SqliteConnectionFactory>(),
+          ),
+          lazy: false,
+        ),
         Provider(
-          create: (_) => SqliteConnectionFactory(),
+          create: (context) => SqliteGamesServiceImpl(
+            gamesSqliteRepository: context.read<SqliteGamesRepositoryImpl>(),
+          ),
           lazy: false,
         ),
         Provider<GamesListRepository>(

@@ -6,6 +6,7 @@ import 'package:game/data/repositories/games/games.dart';
 import 'bloc/home_page_bloc.dart';
 
 class HomeController extends ChangeNotifier {
+  // ignore: unused_field
   final GamesListRepository _gamesRepository;
   HomeController(this._gamesRepository);
 
