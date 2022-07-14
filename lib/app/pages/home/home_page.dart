@@ -8,14 +8,17 @@ import 'package:game/app/core/text/text.dart';
 import 'package:game/app/utils/utils.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/repositories/games/games.dart';
-import 'package:game/data/services/dio/dio.dart';
 
 import 'bloc/home_page_bloc.dart';
 import 'components/components.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final HomeController controller;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,14 +31,18 @@ class _HomePageState extends State<HomePage> {
   late HomePageBloc playStation;
   late HomePageBloc pc;
 
-  // ignore: unused_field
   final _games = <GameModel>[];
 
-  final _controller = HomeController(
-    GamesListRepositoryImpl(
-      dioService: DioServiceImpl(),
-    ),
-  );
+  // final controller = HomeController(
+  //   GamesListRepositoryImpl(
+  //     dioService: DioServiceImpl(),
+  //     sqliteGamesService: SqliteGamesServiceImpl(
+  //       gamesSqliteRepository: SqliteGamesRepositoryImpl(
+  //         sqliteConnectionFactory: SqliteConnectionFactory(),
+  //       ),
+  //     ),
+  //   ),
+  // );
 
   @override
   void initState() {
@@ -55,12 +62,6 @@ class _HomePageState extends State<HomePage> {
     playStation = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.playStation);
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // ignore: unused_local_variable
-      var controller = _controller.fetch();
-      // developer.log(controller.toString());
-    });
   }
 
   @override
@@ -92,31 +93,31 @@ class _HomePageState extends State<HomePage> {
           children: [
             GamesTabItem(
               bloc: xbox,
-              listener: _controller.handleStateUpdate,
+              listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 49,
             ),
             GamesTabItem(
               bloc: nintendo,
-              listener: _controller.handleStateUpdate,
+              listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 130,
             ),
             GamesTabItem(
               bloc: pc,
-              listener: _controller.handleStateUpdate,
+              listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 6,
             ),
             GamesTabItem(
               bloc: browser,
-              listener: _controller.handleStateUpdate,
+              listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 82,
             ),
             GamesTabItem(
               bloc: playStation,
-              listener: _controller.handleStateUpdate,
+              listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 48,
             ),

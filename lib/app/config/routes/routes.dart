@@ -11,7 +11,9 @@ import 'package:game/data/models/game/game_model.dart';
 class Routes {
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      Pages.home: (context) => const HomePage(),
+      Pages.home: (context) => HomePage(
+            controller: context.read(),
+          ),
       Pages.details: (context) {
         final game = ModalRoute.of(context)!.settings.arguments as GameModel;
         return BlocProvider(

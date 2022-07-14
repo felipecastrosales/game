@@ -6,15 +6,19 @@ import 'package:game/app/core/error/exception/exception.dart';
 import 'package:game/data/constants/constants.dart';
 import 'package:game/data/models/game/game_model.dart';
 import 'package:game/data/services/dio/dio_service.dart';
+import 'package:game/data/services/sqlite/sqlite_games_service.dart';
 
 import 'games_list_repository.dart';
 
 class GamesListRepositoryImpl implements GamesListRepository {
   final DioService _dioService;
+  final SqliteGamesService _sqliteGamesService;
 
   GamesListRepositoryImpl({
     required DioService dioService,
-  }) : _dioService = dioService;
+    required SqliteGamesService sqliteGamesService,
+  })  : _dioService = dioService,
+        _sqliteGamesService = sqliteGamesService;
 
   @override
   Future<List<GameModel>> getGamesList({
@@ -23,6 +27,11 @@ class GamesListRepositoryImpl implements GamesListRepository {
     required int idPlatform,
   }) async {
     var dio = _dioService.getDio();
+    // var sqliteData = _sqliteGamesService.getGamesList(
+    //   idPlatform: idPlatform,
+    //   offset: offset,
+    //   limit: limit,
+    // );
     const baseGamesUrl = ConstantsAPI.game;
     try {
       final response = await dio.post(
@@ -42,10 +51,12 @@ class GamesListRepositoryImpl implements GamesListRepository {
       developer.log(responseData.toString());
 
       if (statusCode == 200) {
-        return responseData
+        var responseInternal = responseData
             .map<GameModel>(
                 (games) => GameModel.fromMap(games as Map<String, dynamic>))
             .toList();
+        await _sqliteGamesService.updateListGames(games: responseInternal);
+        return responseInternal;
       } else {
         return <GameModel>[];
       }

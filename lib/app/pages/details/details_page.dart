@@ -91,6 +91,23 @@ class _DetailsPageState extends State<DetailsPage> {
                               )
                               .toList(),
                         ),
+
+                  (widget.game.platforms == null)
+                      ? Text(
+                          '| There are no genres |',
+                          style: AppTextStyles.gameGenres,
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: widget.game.platforms!
+                              .map(
+                                (game) => Text(
+                                  '$bulletPoint ${game.name}',
+                                  style: AppTextStyles.gameGenres,
+                                ),
+                              )
+                              .toList(),
+                        ),
                   const SizedBox(height: 8),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),

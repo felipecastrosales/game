@@ -7,11 +7,13 @@ import 'package:game/data/datasource/database/sqlite/sqlite.dart';
 import 'package:game/data/repositories/games/games.dart';
 import 'package:game/data/services/dio/dio.dart';
 import 'package:game/data/services/games/games.dart';
+import 'package:game/data/services/sqlite/sqlite_games_service_impl.dart';
 
 import 'config/pages/pages.dart';
 import 'config/routes/routes.dart';
 import 'core/theme/app_themes.dart';
 import 'pages/home/bloc/home_page_bloc.dart';
+import 'pages/home/home_controller.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class AppWidget extends StatelessWidget {
         Provider<GamesListRepository>(
           create: (context) => GamesListRepositoryImpl(
             dioService: context.read<DioServiceImpl>(),
+            sqliteGamesService: context.read<SqliteGamesServiceImpl>(),
           ),
         ),
         Provider<GamesListService>(
@@ -40,6 +43,14 @@ class AppWidget extends StatelessWidget {
         BlocProvider(
           create: (context) => HomePageBloc(
             gamesRepository: context.read<GamesListRepository>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeController(
+            GamesListRepositoryImpl(
+              dioService: context.read<DioServiceImpl>(),
+              sqliteGamesService: context.read<SqliteGamesServiceImpl>(),
+            ),
           ),
         ),
       ],
