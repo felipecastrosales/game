@@ -11,7 +11,7 @@ class SqliteConnectionFactory {
   static const name = DatabaseUtils.name;
   static SqliteConnectionFactory? _instance;
   SqliteConnectionFactory._();
-  Database? _db;
+  Database? _database;
   final _lock = Lock();
 
   factory SqliteConnectionFactory() {
@@ -22,10 +22,10 @@ class SqliteConnectionFactory {
   Future<Database> openConnection() async {
     var databasePath = await getDatabasesPath();
     var databasePathFinal = join(databasePath, name);
-    if (_db == null) {
+    if (_database == null) {
       await _lock.synchronized(
         () async {
-          _db ??= await openDatabase(
+          _database ??= await openDatabase(
             databasePathFinal,
             version: version,
             onConfigure: _onConfigure,
@@ -36,12 +36,12 @@ class SqliteConnectionFactory {
         },
       );
     }
-    return _db!;
+    return _database!;
   }
 
   void closeConnection() {
-    _db?.close();
-    _db = null;
+    _database?.close();
+    _database = null;
   }
 
   Future<void> _onConfigure(Database db) async {
