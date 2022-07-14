@@ -11,14 +11,14 @@ import 'package:game/data/repositories/games/games.dart';
 
 import 'bloc/home_page_bloc.dart';
 import 'components/components.dart';
-import 'home_controller.dart';
+import 'home.dart';
 
 class HomePage extends StatefulWidget {
+  final HomeController controller;
   const HomePage({
     Key? key,
     required this.controller,
   }) : super(key: key);
-  final HomeController controller;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,21 +28,9 @@ class _HomePageState extends State<HomePage> {
   late HomePageBloc xbox;
   late HomePageBloc nintendo;
   late HomePageBloc browser;
+  late HomePageBloc windows;
   late HomePageBloc playStation;
-  late HomePageBloc pc;
-
   final _games = <GameModel>[];
-
-  // final controller = HomeController(
-  //   GamesListRepositoryImpl(
-  //     dioService: DioServiceImpl(),
-  //     sqliteGamesService: SqliteGamesServiceImpl(
-  //       gamesSqliteRepository: SqliteGamesRepositoryImpl(
-  //         sqliteConnectionFactory: SqliteConnectionFactory(),
-  //       ),
-  //     ),
-  //   ),
-  // );
 
   @override
   void initState() {
@@ -56,7 +44,7 @@ class _HomePageState extends State<HomePage> {
     browser = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.browser);
-    pc = HomePageBloc(
+    windows = HomePageBloc(
       gamesRepository: context.read<GamesListRepository>(),
     )..add(GamesListEventUtils.pc);
     playStation = HomePageBloc(
@@ -69,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     xbox.close();
     nintendo.close();
     browser.close();
-    pc.close();
+    windows.close();
     playStation.close();
     super.dispose();
   }
@@ -104,16 +92,16 @@ class _HomePageState extends State<HomePage> {
               idPlatform: 130,
             ),
             GamesTabItem(
-              bloc: pc,
-              listener: widget.controller.handleStateUpdate,
-              games: _games,
-              idPlatform: 6,
-            ),
-            GamesTabItem(
               bloc: browser,
               listener: widget.controller.handleStateUpdate,
               games: _games,
               idPlatform: 82,
+            ),
+            GamesTabItem(
+              bloc: windows,
+              listener: widget.controller.handleStateUpdate,
+              games: _games,
+              idPlatform: 6,
             ),
             GamesTabItem(
               bloc: playStation,

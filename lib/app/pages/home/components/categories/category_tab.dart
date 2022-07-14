@@ -35,7 +35,7 @@ class CategoryTab extends StatelessWidget with PreferredSizeWidget {
         CategoryItem(AppTexts.xbox),
         CategoryItem(AppTexts.nintendo),
         CategoryItem(AppTexts.browser),
-        CategoryItem(AppTexts.pc),
+        CategoryItem(AppTexts.windows),
         CategoryItem(AppTexts.ps4),
       ],
     );

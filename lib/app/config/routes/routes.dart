@@ -5,7 +5,7 @@ import 'package:game/app/config/pages/pages.dart';
 import 'package:game/app/pages/details/details_page.dart';
 import 'package:game/app/pages/home/bloc/home_page_bloc.dart';
 
-import 'package:game/app/pages/home/home_page.dart';
+import 'package:game/app/pages/home/home.dart';
 import 'package:game/data/models/game/game_model.dart';
 
 class Routes {

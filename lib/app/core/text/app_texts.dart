@@ -11,9 +11,9 @@ class AppTexts {
   // Tabs
   static const xbox = 'Xbox One';
   static const nintendo = 'Nintendo Switch';
-  static const pc = 'PC';
+  static const windows = 'Windows';
   static const browser = 'Browser';
-  static const ps4 = 'PS4';
+  static const ps4 = 'PlayStation 4';
 
   // Generals
   static const bulletPoint = '\u2022';

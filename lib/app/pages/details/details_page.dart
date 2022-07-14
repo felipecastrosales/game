@@ -77,7 +77,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   const SizedBox(height: 8),
                   (widget.game.genres == null)
                       ? Text(
-                          '| There are no genres |',
+                          'There are no genres',
                           style: AppTextStyles.gameGenres,
                         )
                       : Column(
@@ -91,9 +91,10 @@ class _DetailsPageState extends State<DetailsPage> {
                               )
                               .toList(),
                         ),
+                  const SizedBox(height: 2),
                   (widget.game.platforms == null)
                       ? Text(
-                          '| There are no plaforms available |',
+                          'There are no plaforms available',
                           style: AppTextStyles.gamePlatforms,
                         )
                       : Column(

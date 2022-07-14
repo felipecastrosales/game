@@ -1,15 +1,18 @@
 import 'dart:convert';
 
+import 'package:game/data/constants/constants.dart';
 import 'package:game/data/datasource/database/sqlite/sqlite.dart';
 import 'package:game/data/models/game/game_model.dart';
 
-import 'sqlite_games_repository.dart';
+import 'sqlite.dart';
 
 class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
   final SqliteConnectionFactory _sqliteConnectionFactory;
   SqliteGamesRepositoryImpl({
     required SqliteConnectionFactory sqliteConnectionFactory,
   }) : _sqliteConnectionFactory = sqliteConnectionFactory;
+
+  static const database = DatabaseUtils.databaseName;
 
   @override
   Future<List<GameModel>> getGamesList({
@@ -18,7 +21,6 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     required int idPlatform,
   }) async {
     final connection = await _sqliteConnectionFactory.openConnection();
-    final result = await connection.query('SELECT * FROM GAMES');
     throw Exception('Not implemented');
   }
 
@@ -27,7 +29,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     final connection = await _sqliteConnectionFactory.openConnection();
     final result = await connection.rawQuery(
       '''
-        SELECT * FROM GAMES WHERE id = ?;
+        SELECT * FROM $database WHERE id = ?;
       ''',
       [games.id],
     );
@@ -45,7 +47,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
         await updateGame(game: game);
       } else {
         await connection.insert(
-          'GAMES',
+          database,
           {
             'id': game.id,
             'name': game.name,
@@ -65,25 +67,23 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
   @override
   Future<void> updateGame({required GameModel game}) async {
     final connection = await _sqliteConnectionFactory.openConnection();
-
     await connection.rawUpdate(
       '''
-        UPDATE GAMES SET
+        UPDATE $database SET
           name = ?,
           screenshots = ?,
           summary = ?,
           genres = ?,
-          platforms = ?
-          platform = ?
+          platforms = ?,
           WHERE id = ?
       ''',
       [
+        game.id,
         game.name,
         game.screenshots ?? '',
         game.summary ?? '',
         json.encode((game.genres ?? []).map((e) => e.toJson()).toList()),
         json.encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
-        game.id,
       ],
     );
   }
