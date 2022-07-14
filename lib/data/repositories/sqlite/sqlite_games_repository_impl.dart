@@ -16,8 +16,10 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     required int limit,
     required int offset,
     required int idPlatform,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    final connection = await _sqliteConnectionFactory.openConnection();
+    final result = await connection.query('SELECT * FROM GAMES');
+    throw Exception('Not implemented');
   }
 
   @override
@@ -33,7 +35,10 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
   }
 
   @override
-  Future<void> updateListGames({required List<GameModel> games}) async {
+  Future<void> updateListGames({
+    required List<GameModel> games,
+    required int idPlatform,
+  }) async {
     final connection = await _sqliteConnectionFactory.openConnection();
     for (GameModel game in games) {
       if (await checkContainGame(games: game)) {
@@ -50,6 +55,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
                 .encode((game.genres ?? []).map((e) => e.toJson()).toList()),
             'platforms': json
                 .encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
+            'platform': idPlatform,
           },
         );
       }
@@ -68,6 +74,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
           summary = ?,
           genres = ?,
           platforms = ?
+          platform = ?
           WHERE id = ?
       ''',
       [

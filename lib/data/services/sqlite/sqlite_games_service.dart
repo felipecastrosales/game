@@ -9,5 +9,8 @@ abstract class SqliteGamesService {
 
   Future<bool> checkContainGame({required GameModel games});
   Future<void> updateGame({required GameModel game});
-  Future<void> updateListGames({required List<GameModel> games});
+  Future<void> updateListGames({
+    required List<GameModel> games,
+    required int idPlatform,
+  });
 }

@@ -55,7 +55,11 @@ class GamesListRepositoryImpl implements GamesListRepository {
             .map<GameModel>(
                 (games) => GameModel.fromMap(games as Map<String, dynamic>))
             .toList();
-        await _sqliteGamesService.updateListGames(games: responseInternal);
+        await _sqliteGamesService.updateListGames(
+          games: responseInternal,
+          idPlatform: idPlatform,
+        );
+
         return responseInternal;
       } else {
         return <GameModel>[];

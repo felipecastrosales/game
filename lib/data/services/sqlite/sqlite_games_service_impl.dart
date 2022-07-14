@@ -33,7 +33,13 @@ class SqliteGamesServiceImpl implements SqliteGamesService {
   }
 
   @override
-  Future<void> updateListGames({required List<GameModel> games}) {
-    return _gamesSqliteRepository.updateListGames(games: games);
+  Future<void> updateListGames({
+    required List<GameModel> games,
+    required int idPlatform,
+  }) {
+    return _gamesSqliteRepository.updateListGames(
+      games: games,
+      idPlatform: idPlatform,
+    );
   }
 }

@@ -10,6 +10,7 @@ class MigrationV1 implements Migration {
   static const summary = DatabaseUtils.summary;
   static const genres = DatabaseUtils.genres;
   static const platforms = DatabaseUtils.platforms;
+  static const platform = DatabaseUtils.platform;
 
   @override
   void create(Batch batch) {
@@ -20,7 +21,8 @@ class MigrationV1 implements Migration {
         $screenshots text not null,
         $summary text not null,
         $genres text not null,
-        $platforms text not null
+        $platforms text not null,
+        $platform integer not null
       );
     ''');
   }

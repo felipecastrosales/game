@@ -11,4 +11,5 @@ class DatabaseUtils {
   static const summary = 'summary';
   static const genres = 'genres';
   static const platforms = 'platforms';
+  static const platform = 'platform';
 }
