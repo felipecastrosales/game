@@ -27,8 +27,8 @@
 
 <p>
     A aplicação une conhecimentos para conhecer mais a respeito dos meus conhecimentos técnicos sobre Dart e Flutter, além do de desenvolvimento em geral e práticas de arquitetura de software.
-    Além disso, aborda também **consumos de APIs**, **navegação entre telas com os parâmetros** desses valores recebidos além do **cache** desses dados.<br> 
-    <a href="https://api-docs.igdb.com/#about">Nesse projeto, a API utilizada foi a do IGDB.</a>.<br>
+    Além disso, aborda também Consumos de APIs, Navegação entre telas com os parâmetros desses valores recebidos, além do cache desses dados.<br> 
+    <a href="https://api-docs.igdb.com/#about">Nesse projeto, a API utilizada foi a do IGDB</a>.<br>
 </p>
 
 ---
@@ -36,7 +36,7 @@
 <h2>📱 Preview</h2>
 
    <p align="center">
-      <img src="assets/images/screenshots/demo.gif" width="400" alt="Game App Demonstração">
+      <img src="assets/screenshots/demo.gif" width="400" alt="Game App Demonstração">
    </p>
 
 ---
@@ -66,9 +66,9 @@
 <h2>🤯 Desafios e Aprendizados ao longo do caminho</h2>
 
    > **Esse projeto foi muito desafiador e ao mesmo tempo muito empolgante**! 
-   Eu de fato me senti muito contente em conseguir fazer grande parte dos requisitos e até mesmo **buscar algo a mais com as implementações que fiz**.
+   Eu de fato me senti muito contente em conseguir fazer e até mesmo **buscar algo a mais com as implementações que fiz**.
 
-   No início, tudo foi muito bem desafiador e eu não conseguia implementar esses dados, seja para configurar a API, juntamente com a serialização desses dados. Mas fui persistente até o fim e consegui chegar em um resultado onde fiquei feliz pelo o que foi desenvolvido. <br>
+   No início, tudo foi bem desafiador e eu não estava conseguindo implementar esses dados, seja para configurar a API ou até mesmo realizar a serialização desses dados. Mas fui persistente até o fim e consegui chegar em um resultado onde fiquei muito feliz pelo o que foi desenvolvido. <br>
 
    Esse projeto me fez cair ainda mais na real, e além disso, em confiar no potencial que tenho e que sou. Saber aplicar os conhecimentos que possuo hoje, ainda tenho muito a aprender - afinal, o aprendizado é contínuo. <br>
 
