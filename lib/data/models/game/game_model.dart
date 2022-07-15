@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 
@@ -52,9 +53,7 @@ class GameModel {
   }
 
   factory GameModel.fromMap(Map<String, dynamic> map) {
-    String getScreenshots(List<dynamic> images) {
-      return images.first['url'];
-    }
+    String getScreenshots(List<dynamic> images) => images.first['url'];
 
     return GameModel(
       id: map['id']?.toInt() ?? 0,
@@ -70,6 +69,33 @@ class GameModel {
           ? List<PlatformModel>.from(map['platforms']
               ?.map((platform) => PlatformModel.fromMap(platform)))
           : null,
+    );
+  }
+
+  factory GameModel.fromDatabase(Map<String, dynamic> map) {
+    String getScreenshots(List<dynamic>? images) => images!.first['url'] ?? '';
+  
+    List<GenreModel> genresLocale = json
+        .decode(map['genres'])
+        .map<GenreModel>((genre) => GenreModel.fromJson(genre))
+        .toList();
+    List<PlatformModel> platformsLocale = json
+        .decode(map['platforms'])
+        .map<PlatformModel>((plaftform) => PlatformModel.fromJson(plaftform))
+        .toList();
+
+    developer.log('${genresLocale is String}');
+    developer.log('${platformsLocale is String}');
+    developer.log('${map['genres']}', name: 'genre');
+    developer.log('$genresLocale', name: 'genre');
+
+    return GameModel(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      screenshots: getScreenshots(map['screenshots']),
+      summary: map['summary'],
+      genres: genresLocale,
+      platforms: platformsLocale,
     );
   }
 

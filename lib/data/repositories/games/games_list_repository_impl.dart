@@ -27,11 +27,6 @@ class GamesListRepositoryImpl implements GamesListRepository {
     required int idPlatform,
   }) async {
     var dio = _dioService.getDio();
-    var sqliteData = _sqliteGamesService.getGamesList(
-      idPlatform: idPlatform,
-      offset: offset,
-      limit: limit,
-    );
     const baseGamesUrl = ConstantsAPI.game;
     try {
       final response = await dio.post(
@@ -55,16 +50,18 @@ class GamesListRepositoryImpl implements GamesListRepository {
             .map<GameModel>(
                 (games) => GameModel.fromMap(games as Map<String, dynamic>))
             .toList();
-        // await _sqliteGamesService.updateListGames(
-        //   games: responseInternal,
-        //   idPlatform: idPlatform,
-        // );
+        await _sqliteGamesService.updateListGames(
+          games: responseInternal,
+          idPlatform: idPlatform,
+        );
         return responseInternal;
       } else {
-        
-        return <GameModel>[];
+        return _sqliteGamesService.getGamesList(
+          limit: limit,
+          offset: offset,
+          idPlatform: idPlatform,
+        );
       }
-
     } on DioError catch (e, s) {
       var errorStatusCode = e.response?.statusCode;
       if (errorStatusCode == 429) {

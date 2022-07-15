@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:game/data/constants/constants.dart';
 import 'package:game/data/datasource/database/sqlite/sqlite.dart';
@@ -21,7 +22,18 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     required int idPlatform,
   }) async {
     final connection = await _sqliteConnectionFactory.openConnection();
-    throw Exception('Not implemented');
+    var result = await connection.rawQuery(
+      '''SELECT * FROM GAMES WHERE platform = ?''',
+      [idPlatform],
+    );
+
+    try {
+      return result.map((game) => GameModel.fromDatabase(game)).toList();
+    } catch (e, s) {
+      developer.log(e.toString(), name: 'Error');
+      developer.log(s.toString(), name: 'StackTrace');
+      return <GameModel>[];
+    }
   }
 
   @override
@@ -29,7 +41,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
     final connection = await _sqliteConnectionFactory.openConnection();
     final result = await connection.rawQuery(
       '''
-        SELECT * FROM $database WHERE id = ?;
+        SELECT * FROM $database WHERE id = ?
       ''',
       [games.id],
     );
@@ -53,10 +65,12 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
             'name': game.name,
             'screenshots': game.screenshots ?? '',
             'summary': game.summary ?? '',
-            'genres': json
-                .encode((game.genres ?? []).map((e) => e.toJson()).toList()),
-            'platforms': json
-                .encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
+            'genres': jsonEncode(
+              (game.genres ?? []).map((e) => e.toJson()).toList(),
+            ),
+            'platforms': jsonEncode(
+              (game.platforms ?? []).map((e) => e.toJson()).toList(),
+            ),
             'platform': idPlatform,
           },
         );
@@ -74,7 +88,7 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
           screenshots = ?,
           summary = ?,
           genres = ?,
-          platforms = ?,
+          platforms = ?
           WHERE id = ?
       ''',
       [
@@ -82,8 +96,8 @@ class SqliteGamesRepositoryImpl implements SqliteGamesRepository {
         game.name,
         game.screenshots ?? '',
         game.summary ?? '',
-        json.encode((game.genres ?? []).map((e) => e.toJson()).toList()),
-        json.encode((game.platforms ?? []).map((e) => e.toJson()).toList()),
+        jsonEncode((game.genres ?? []).map((e) => e.toJson()).toList()),
+        jsonEncode((game.platforms ?? []).map((e) => e.toJson()).toList()),
       ],
     );
   }
