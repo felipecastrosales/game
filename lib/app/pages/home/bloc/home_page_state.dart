@@ -15,9 +15,15 @@ class HomePageLoading extends HomePageState {}
 class HomePageSuccess extends HomePageState {
   final List<GameModel> games;
   const HomePageSuccess({required this.games});
+
+  @override
+  List<Object> get props => [games];
 }
 
 class HomePageError extends HomePageState {
   final String message;
   const HomePageError(this.message);
+
+  @override
+  List<Object> get props => [message];
 }
