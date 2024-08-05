@@ -16,9 +16,9 @@ import 'home.dart';
 class HomePage extends StatefulWidget {
   final HomeController controller;
   const HomePage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();

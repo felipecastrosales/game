@@ -10,10 +10,10 @@ class GamesCardItem extends StatelessWidget {
   final String title;
 
   const GamesCardItem({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

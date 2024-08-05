@@ -4,10 +4,10 @@ import 'package:game/app/core/colors/colors.dart';
 import 'package:game/app/core/text/text.dart';
 import 'package:game/app/pages/home/components/components.dart';
 
-class CategoryTab extends StatelessWidget with PreferredSizeWidget {
+class CategoryTab extends StatelessWidget implements PreferredSizeWidget {
   const CategoryTab({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

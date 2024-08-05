@@ -15,8 +15,8 @@ class GamesGridTile extends StatefulWidget {
   const GamesGridTile(
     this.homePageBloc,
     this.idPlatform, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<GamesGridTile> createState() => _GamesGridTileState();

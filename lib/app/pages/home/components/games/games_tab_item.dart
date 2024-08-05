@@ -12,12 +12,12 @@ class GamesTabItem<B extends StateStreamable<S>, S> extends StatelessWidget {
   final List<GameModel> games;
 
   const GamesTabItem({
-    Key? key,
+    super.key,
     required this.bloc,
     required this.listener,
     required this.idPlatform,
     required this.games,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

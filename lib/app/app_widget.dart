@@ -17,7 +17,7 @@ import 'pages/home/bloc/home_page_bloc.dart';
 import 'pages/home/home.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({Key? key}) : super(key: key);
+  const AppWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

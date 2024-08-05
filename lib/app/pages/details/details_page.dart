@@ -11,9 +11,9 @@ class DetailsPage extends StatefulWidget {
   final GameModel game;
 
   const DetailsPage({
-    Key? key,
+    super.key,
     required this.game,
-  }) : super(key: key);
+  });
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();

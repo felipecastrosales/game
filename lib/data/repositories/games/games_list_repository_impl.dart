@@ -62,7 +62,7 @@ class GamesListRepositoryImpl implements GamesListRepository {
           idPlatform: idPlatform,
         );
       }
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       var errorStatusCode = e.response?.statusCode;
       if (errorStatusCode == 429) {
         throw TooManyRequestsException('Many Request happening.');
