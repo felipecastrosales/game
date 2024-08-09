@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 2.0.0+1
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   cached_network_image: ^3.4.0
@@ -33,11 +33,7 @@ flutter:
 
 flutter_icons:
   ios: true
-  web: true
-  macos: true
-  linux: true
   android: true
-  windows: true
   remove_alpha_ios: true
   image_path: "assets/images/logo-square.png"
   image_path_ios: "assets/images/logo-square.png"
