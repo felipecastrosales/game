@@ -46,14 +46,16 @@ class GamesListRepositoryImpl implements GamesListRepository {
       developer.log(responseData.toString());
 
       if (statusCode == 200) {
-        var responseInternal = responseData
+        final responseInternal = responseData
             .map<GameModel>(
                 (games) => GameModel.fromMap(games as Map<String, dynamic>))
             .toList();
+
         await _sqliteGamesService.updateListGames(
           games: responseInternal,
           idPlatform: idPlatform,
         );
+
         return responseInternal;
       } else {
         return _sqliteGamesService.getGamesList(
@@ -62,7 +64,7 @@ class GamesListRepositoryImpl implements GamesListRepository {
           idPlatform: idPlatform,
         );
       }
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       var errorStatusCode = e.response?.statusCode;
       if (errorStatusCode == 429) {
         throw TooManyRequestsException('Many Request happening.');

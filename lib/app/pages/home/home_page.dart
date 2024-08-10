@@ -1,5 +1,3 @@
-// import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,9 +14,9 @@ import 'home.dart';
 class HomePage extends StatefulWidget {
   final HomeController controller;
   const HomePage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -70,11 +68,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.background,
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            AppTexts.appTitleName,
-            style: AppTextStyles.appBar,
-          ),
-          elevation: 0,
+          title: const Text(AppTexts.appTitleName),
           bottom: const CategoryTab(),
         ),
         body: TabBarView(

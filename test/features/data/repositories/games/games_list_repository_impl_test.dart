@@ -51,7 +51,7 @@ void main() {
               ''',
             ),
           ).thenThrow(
-            DioError(
+            DioException(
               requestOptions: RequestOptions(path: ''),
               response: Response(
                 statusCode: 404,

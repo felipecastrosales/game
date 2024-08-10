@@ -6,5 +6,5 @@ class ConstantsAPI {
   static const http = 'http:';
 
   static const clientId = 'lspi3s8jwrrfamheoymfxq4tyyckcu';
-  static const token = 'tzf0d357zz1kblty0700whxtspxr3s';
+  static const token = 'sgiw17dq3bhmbx9bg5z8tqfxkhdhqd';
 }

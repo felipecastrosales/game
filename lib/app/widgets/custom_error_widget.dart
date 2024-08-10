@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:game/app/core/colors/colors.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({Key? key}) : super(key: key);
+  const CustomErrorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -15,8 +15,8 @@ class GamesGridTile extends StatefulWidget {
   const GamesGridTile(
     this.homePageBloc,
     this.idPlatform, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<GamesGridTile> createState() => _GamesGridTileState();
@@ -65,8 +65,8 @@ class _GamesGridTileState extends State<GamesGridTile>
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
                   childAspectRatio: 4 / 5,
                 ),
                 itemCount: _games.length,
@@ -76,6 +76,7 @@ class _GamesGridTileState extends State<GamesGridTile>
                   final title = _games[index].name;
 
                   return InkWell(
+                    borderRadius: BorderRadius.circular(16),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -113,7 +114,7 @@ class _GamesGridTileState extends State<GamesGridTile>
                       padding: const EdgeInsets.only(top: 16, bottom: 24),
                       child: Center(
                         child: AnimatedIcon(
-                          icon: AnimatedIcons.add_event,
+                          icon: AnimatedIcons.ellipsis_search,
                           progress: _animationController,
                           color: AppColors.primary,
                           size: 50,

@@ -10,14 +10,14 @@ class GamesCardItem extends StatelessWidget {
   final String title;
 
   const GamesCardItem({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: AppColors.background,
